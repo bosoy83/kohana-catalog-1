@@ -9,4 +9,5 @@ return array(
 		'sub' => array(),
 	),
 	'catalog_elements' => array(),
+	'nomenclature' => array(),
 );

@@ -136,7 +136,6 @@ class Controller_Admin_Modules_Catalog_Element extends Controller_Admin_Modules_
 			$properties = $helper_orm->property_list();
 			$this->template
 				->set_filename('modules/catalog/element/edit')
-				->set('errors', $errors)
 				->set('helper_orm', $helper_orm)
 				->set('categories', $categories)
 				->set('properties', $properties);
@@ -145,6 +144,24 @@ class Controller_Admin_Modules_Catalog_Element extends Controller_Admin_Modules_
 			$this->left_menu_category_add($category_orm);
 			$this->left_menu_element_list($category_orm);
 			$this->left_menu_element_add($orm);
+			
+			if (Helper_Module::check_module('greor-nomenclature')) {
+				$injector = $this->injectors['nomenclature'];
+				if ($orm->loaded()) {
+					try {
+						$this->hook_list_content[] = $injector->get_hook($orm);
+			
+						$this->menu_left_add( $injector->menu_list($orm) );
+						$this->menu_left_add( $injector->menu_add($orm) );
+			
+					} catch (ORM_Validation_Exception $e) {
+						$errors = array_merge($errors, $this->errors_extract($e));
+					}
+				}
+			}
+			
+			$this->template
+				->set('errors', $errors);
 		} else {
 			$request
 				->redirect($this->back_url);

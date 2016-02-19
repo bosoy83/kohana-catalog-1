@@ -42,6 +42,23 @@
 				$this.html('<input class="casted-input" value="'+$this.data('value')+'" style="width:70px !important;">');
 				$this.children('input').select();
 			});
+			$list.on("keydown", ".casted-input", function(e){
+				switch(e.which) {
+					case 27:
+					case 13:
+						$(this).parent()
+							.trigger("click");
+						e.preventDefault();
+						$(this).parent()
+							.trigger("click");
+						break;
+				}
+			});
+			$list.on("keypress", ".casted-input", function(e){
+				if (e.which < 48 || e.which > 57) {
+					return false;
+				}
+			});
 		}
 	});
 </script>

@@ -12,6 +12,9 @@ class Controller_Admin_Modules_Catalog extends Controller_Admin_Front {
 	);
 	protected $is_initial;
 	
+	protected $injectors = array(
+		'nomenclature' => array('Injector_Nomenclature')
+	);
 	
 	public function before()
 	{
