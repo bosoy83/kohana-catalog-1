@@ -153,6 +153,26 @@ class Controller_Admin_Modules_Catalog extends Controller_Admin_Front {
 		}
 	}
 	
+	protected function left_menu_category_export($orm)
+	{
+		if ($this->acl->is_allowed($this->user, $orm, 'export')) {
+			$this->menu_left_add(array(
+				'catalog' => array(
+					'sub' => array(
+						'export' => array(
+							'title' => __('Export categories (CSV)'),
+							'link'  => Route::url('modules', array(
+								'controller' => $this->_controller_name['category'],
+								'action' => 'export',
+							)),
+							'target' => '_blank',
+						),
+					),
+				),
+			));
+		}
+	}
+	
 	protected function left_menu_element_list($orm)
 	{
 		if ($orm->loaded()) {

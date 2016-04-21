@@ -31,6 +31,7 @@ class Model_Catalog_Category extends ORM_Base {
 			'category_id' => 'Category',
 			'level' => 'Level',
 			'uri' => 'URI',
+			'code' => 'Code',
 			'title' => 'Title',
 			'image' => 'Image',
 			'text' => 'Text',
@@ -57,14 +58,18 @@ class Model_Catalog_Category extends ORM_Base {
 			),
 			'uri' => array(
 				array('min_length', array(':value', 2)),
-				array('max_length', array(':value', 100)),
+				array('max_length', array(':value', 255)),
 				array('alpha_dash'),
 				array(array($this, 'check_uri')),
+			),
+			'code' => array(
+				array('max_length', array(':value', 255)),
+				array('alpha_dash'),
 			),
 			'title' => array(
 				array('not_empty'),
 				array('min_length', array(':value', 2)),
-				array('max_length', array(':value', 100)),
+				array('max_length', array(':value', 255)),
 			),
 			'image' => array(
 				array('max_length', array(':value', 255)),

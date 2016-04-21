@@ -43,6 +43,19 @@
 		)),
 	));
 	
+/**** code ****/
+	
+	echo View_Admin::factory('form/control', array(
+		'field' => 'code',
+		'errors' => $errors,
+		'labels' => $labels,
+		'required' => $required,
+		'controls' => Form::input('code', $orm->code, array(
+			'id' => 'code_field',
+			'class' => 'input-xxlarge',
+		)),
+	));
+	
 /**** uri ****/
 	
 	echo View_Admin::factory('form/control', array(

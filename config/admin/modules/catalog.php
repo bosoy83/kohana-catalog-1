@@ -36,6 +36,11 @@ return array(
 					'resource' => 'catalog_category',
 					'privilege' => 'fix_positions',
 				),
+				'catalog_category_export' => array(
+					'role' => 'main',
+					'resource' => 'catalog_category',
+					'privilege' => 'export',
+				),
 				
 				'catalog_element_add' => array(
 					'role' => 'main',

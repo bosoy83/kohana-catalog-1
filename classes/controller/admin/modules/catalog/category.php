@@ -29,6 +29,7 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 		$this->left_menu_category_list();
 		$this->left_menu_category_add($orm);
 		$this->left_menu_category_fix($orm);
+		$this->left_menu_category_export($orm);
 		
 		if ($this->category_id) {
 			$category_orm = ORM::factory('catalog_Category', $this->category_id);
@@ -137,6 +138,7 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 			
 			$this->left_menu_category_list();
 			$this->left_menu_category_add($orm);
+			$this->left_menu_category_export($orm);
 			$this->left_menu_element_list($orm);
 		} else {
 			$request
@@ -228,6 +230,61 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 			$request
 				->redirect($this->back_url);
 		}
+	}
+	
+	public function action_export()
+	{
+		$this->auto_render = FALSE;
+		$this->auto_send_cache_headers = FALSE;
+		
+		$orm = ORM::factory('catalog_Category');
+		if ( ! $this->acl->is_allowed($this->user, $orm, 'export')) {
+			throw new HTTP_Exception_404();
+		}
+		
+		$list = $orm
+			->order_by('level', 'asc')
+			->find_all()
+			->as_array();
+		
+		$this->response
+			->headers('Content-type', 'text/csv; charset=utf-8')
+			->headers('Content-Disposition', 'attachment; filename=categories_'.date('Y-m-d_H-i').'.csv')
+			->headers('Pragma', 'no-cache')
+			->headers('Expires', '0');
+		
+		$template = View_Admin::factory('modules/catalog/category/export', array(
+			'list' => $this->parse_categories($list)
+		));
+		
+		$this->response->body($template->render());
+	}
+	
+	private function parse_categories(array $list)
+	{
+		$result = array();
+		foreach ($list as $_orm) {
+			$_item = array(
+				'id' => $_orm->id,
+				'code' => $_orm->code,
+				'title' => $_orm->title,
+			);
+			
+			if ($_orm->level == 0) {
+				$_item['path'] = array(
+					$_orm->title
+				);
+			} elseif (array_key_exists($_orm->category_id, $result)) {
+				$_item['path'] = $result[$_orm->category_id]['path'];
+				$_item['path'][] = 	$_orm->title;
+			} else {
+				continue;
+			}
+			
+			$result[$_orm->id] = $_item;
+		}
+		
+		return $result;
 	}
 	
 	protected function _get_breadcrumbs()

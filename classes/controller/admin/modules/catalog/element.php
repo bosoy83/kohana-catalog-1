@@ -32,6 +32,7 @@ class Controller_Admin_Modules_Catalog_Element extends Controller_Admin_Modules_
 		
 		$this->left_menu_category_list();
 		$this->left_menu_category_add($category_orm);
+		$this->left_menu_category_export($category_orm);
 		$this->left_menu_element_list($category_orm);
 		$this->left_menu_element_add($orm);
 		
@@ -142,6 +143,7 @@ class Controller_Admin_Modules_Catalog_Element extends Controller_Admin_Modules_
 			
 			$this->left_menu_category_list();
 			$this->left_menu_category_add($category_orm);
+			$this->left_menu_category_export($category_orm);
 			$this->left_menu_element_list($category_orm);
 			$this->left_menu_element_add($orm);
 			

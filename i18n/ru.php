@@ -36,4 +36,5 @@ return array(
 	'Edit position' => 'Редактировать позицию',
 	'position edition' => 'редактирование позиции',
 	'new position' => 'новая позиция',
+	'Export categories (CSV)' => 'Экспорт категорий (CSV)',
 );
