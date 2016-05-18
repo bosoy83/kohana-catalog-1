@@ -36,4 +36,12 @@ class ORM_Helper_Catalog_Element extends ORM_Helper_Property_Support {
 			),
 		);
 	}
+	
+	protected function _initialize_file_fields()
+	{
+		$this->_file_fields['image_1']['allowed_src_dirs'] = array( DOCROOT.'upload/tmp/' );
+		$this->_file_fields['image_2']['allowed_src_dirs'] = array( DOCROOT.'upload/tmp/' );
+	
+		parent::_initialize_file_fields();
+	}
 }
