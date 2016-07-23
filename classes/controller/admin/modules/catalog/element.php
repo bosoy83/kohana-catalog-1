@@ -106,7 +106,7 @@ class Controller_Admin_Modules_Catalog_Element extends Controller_Admin_Modules_
 				);
 				
 				if (empty($values['uri'])) {
-					$values['uri'] = transliterate_unique($values['title'], $orm, 'uri');
+					$values['uri'] = Ku_Text::slug($values['title']);
 				}
 				
 				$helper_orm->save($values + $_FILES);
