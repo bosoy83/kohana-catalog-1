@@ -11,6 +11,10 @@
 	$query_array = array(
 		'category' => $CATALOG_CATEGORY_ID
 	);
+	
+	if ( ! empty($BACK_URL)) {
+		$query_array['back_url'] = $BACK_URL;
+	}
 
 	if ($orm->loaded()) {
 		$query_array = Paginator::query(Request::current(), $query_array);

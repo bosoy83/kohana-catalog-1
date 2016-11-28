@@ -4,6 +4,8 @@
 		'breadcrumbs' => $breadcrumbs
 	));
 
+	echo View_Admin::factory('modules/catalog/search/filter');
+	
 	if ($list->count() <= 0) {
 		return;
 	}

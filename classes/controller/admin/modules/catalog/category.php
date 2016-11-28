@@ -6,7 +6,7 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 	
 	public function action_index()
 	{
-		$orm = ORM::factory('catalog_Category')
+		$orm = ORM::factory('Catalog_Category')
 			->where('category_id', '=', $this->category_id);
 		
 		$paginator_orm = clone $orm;
@@ -32,7 +32,7 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 		$this->left_menu_category_export($orm);
 		
 		if ($this->category_id) {
-			$category_orm = ORM::factory('catalog_Category', $this->category_id);
+			$category_orm = ORM::factory('Catalog_Category', $this->category_id);
 			if ( ! $category_orm->loaded()) {
 				throw new HTTP_Exception_404();
 			}
@@ -49,7 +49,7 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 	{
 		$request = $this->request->current();
 		$id = (int) $request->param('id');
-		$helper_orm = ORM_Helper::factory('catalog_Category');
+		$helper_orm = ORM_Helper::factory('Catalog_Category');
 		$orm = $helper_orm->orm();
 		if ( (bool) $id) {
 			$orm
@@ -150,7 +150,7 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 	{
 		$level = 0;
 		if ($category_id > 0) {
-			$orm = ORM::factory('catalog_Category', $category_id);
+			$orm = ORM::factory('Catalog_Category', $category_id);
 			if ($orm->loaded()) {
 				$level = (int) $orm->level + 1;
 			}
@@ -163,7 +163,7 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 		$request = $this->request->current();
 		$id = (int) $request->param('id');
 	
-		$helper_orm = ORM_Helper::factory('catalog_Category');
+		$helper_orm = ORM_Helper::factory('Catalog_Category');
 		$orm = $helper_orm->orm();
 		$orm
 			->and_where('id', '=', $id)
@@ -198,7 +198,7 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 		$id = (int) $request->param('id');
 		$mode = $request->query('mode');
 		$errors = array();
-		$helper_orm = ORM_Helper::factory('catalog_Category');
+		$helper_orm = ORM_Helper::factory('Catalog_Category');
 		
 		try {
 			$this->element_position($helper_orm, $id, $mode);
@@ -237,7 +237,7 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 		$this->auto_render = FALSE;
 		$this->auto_send_cache_headers = FALSE;
 		
-		$orm = ORM::factory('catalog_Category');
+		$orm = ORM::factory('Catalog_Category');
 		if ( ! $this->acl->is_allowed($this->user, $orm, 'export')) {
 			throw new HTTP_Exception_404();
 		}
@@ -294,7 +294,7 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 		$request = $this->request->current();
 		if (in_array($request->action(), array('edit'))) {
 			$id = (int) $request->param('id');
-			$category_orm = ORM::factory('catalog_Category')
+			$category_orm = ORM::factory('Catalog_Category')
 				->where('id', '=', $id)
 				->find();
 			if ($category_orm->loaded()) {

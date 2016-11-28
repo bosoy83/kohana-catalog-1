@@ -5,6 +5,7 @@ return array(
 		'resources' => array(
 			'catalog_category_controller' => 'module_controller',
 			'catalog_element_controller' => 'module_controller',
+			'catalog_search_controller' => 'module_controller',
 			'catalog_category' => 'module',
 			'catalog_element' => 'module',
 		),
@@ -18,6 +19,11 @@ return array(
 				'controller_element_access' => array(
 					'role' => 'main',
 					'resource' => 'catalog_element_controller',
+					'privilege' => 'access',
+				),
+				'controller_search_access' => array(
+					'role' => 'main',
+					'resource' => 'catalog_search_controller',
 					'privilege' => 'access',
 				),
 				

@@ -37,4 +37,6 @@ return array(
 	'position edition' => 'редактирование позиции',
 	'new position' => 'новая позиция',
 	'Export categories (CSV)' => 'Экспорт категорий (CSV)',
+	'Search by article' => 'Поиск по артиклу',
+	'Search result' => 'Результаты поиска',
 );

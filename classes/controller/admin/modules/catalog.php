@@ -9,6 +9,7 @@ class Controller_Admin_Modules_Catalog extends Controller_Admin_Front {
 	protected $_controller_name = array(
 		'category' => 'catalog_category',
 		'element' => 'catalog_element',
+		'search' => 'catalog_search',
 	);
 	protected $is_initial;
 	
