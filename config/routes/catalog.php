@@ -4,6 +4,7 @@ return array (
 	'catalog_element' => array(
 		'uri_callback' => '/<element_uri>-<element_id>.html(?<query>)',
 		'regex' => array(
+			'element_uri' => '[^/.,;?\n]+',
 			'element_id' => '[0-9]++'
 		),
 		'defaults' => array(
