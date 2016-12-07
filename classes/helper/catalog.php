@@ -41,4 +41,30 @@ class Helper_Catalog {
 		return $params;
 	}
 	
+	/**
+	 * For catalog mode 'root'
+	 * 'uri_callback' in route function for recursive categories.
+	 * 'regex' used for generation links ('(/<category_uri>(/<element_uri>))(?<query>)')
+	 * 
+	 * @param string $uri
+	 * @param Route $route
+	 */
+	public static function route_root($uri, $route)
+	{
+		$categories = category_uri_list();
+		
+		if ( ! in_array($uri, $categories)) {
+			return FALSE;
+		}
+		
+		$params = $route->defaults();
+		$params['category_uri'] = array();
+		$sergments = explode('/', $uri);
+		foreach ($sergments as $_seg) {
+			$params['category_uri'][] = $_seg;
+		}
+
+		return $params;
+	}
+	
 }
