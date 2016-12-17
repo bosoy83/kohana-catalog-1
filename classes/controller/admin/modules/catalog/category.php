@@ -97,7 +97,7 @@ class Controller_Admin_Modules_Catalog_Category extends Controller_Admin_Modules
 				);
 				
 				if (empty($values['uri'])) {
-					$values['uri'] = transliterate_unique($values['title'], $orm, 'uri');
+					$values['uri'] = Ku_Text::slug($values['title']);
 				}
 				$values['level'] = $this->_get_level($values['category_id']);
 				
